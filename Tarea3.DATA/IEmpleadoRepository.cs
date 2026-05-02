@@ -2,7 +2,7 @@
 
 namespace Tarea3.DATA
 {
-    internal interface IEmpleadoRepository
+    public interface IEmpleadoRepository
     {
         IEnumerable<Empleado> ObtenerTodos();
         Empleado? ObtenerPorId(int id);

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tarea3.DATA\Tarea3.DATA.csproj" />
     <ProjectReference Include="..\Tarea3.MODEL\Tarea3.MODEL.csproj" />
   </ItemGroup>
 
