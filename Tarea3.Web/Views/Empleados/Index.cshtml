@@ -1,5 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<Tarea3.MODEL.Empleado>
+
+<h1>Nómina de Empleados</h1>
+
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="busqueda" value="@ViewBag.Busqueda" class="form-control" placeholder="Buscar por nombre o departamento...">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+<a asp-action="Create" class="btn btn-success mb-3">Nuevo Empleado</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre Completo</th>
+            <th>Departamento</th>
+            <th>Salario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NombreCompleto</td>
+                <td>@item.Departamento</td>
+                <td>@item.Salario.ToString("C2")</td>
+                <td>
+                    <span class="badge @(item.Activo ? "bg-success" : "bg-danger")">
+                        @(item.Activo ? "Activo" : "Dado de Baja")
+                    </span>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-info">Editar</a>
+                    <form asp-action="ToggleActivo" asp-route-id="@item.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm @(item.Activo ? "btn-warning" : "btn-primary")">
+                            @(item.Activo ? "Dar de Baja" : "Activar")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    Página @ViewBag.PaginaActual de @ViewBag.TotalPaginas (Total: @ViewBag.TotalRegistros registros)
+    <nav>
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.PaginaActual <= 1 ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@(ViewBag.PaginaActual - 1)" asp-route-busqueda="@ViewBag.Busqueda">Anterior</a>
+            </li>
+            <li class="page-item @(ViewBag.PaginaActual >= ViewBag.TotalPaginas ? "disabled" : "")">
+                <a class="page-link" asp-route-pagina="@(ViewBag.PaginaActual + 1)" asp-route-busqueda="@ViewBag.Busqueda">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</div>
