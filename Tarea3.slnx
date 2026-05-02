@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Tarea3.DATA/Tarea3.DATA.csproj" />
+  <Project Path="Tarea3.MODEL/Tarea3.MODEL.csproj" />
+  <Project Path="Tarea3.Web/Tarea3.Web.csproj" />
+</Solution>
